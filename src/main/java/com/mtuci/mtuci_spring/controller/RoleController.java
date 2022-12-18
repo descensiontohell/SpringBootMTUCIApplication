@@ -24,13 +24,13 @@ public class RoleController {
     }
 
     @RequestMapping("/role/delete/{id}")
-    public String deleteTask(@PathVariable int id) {
+    public String deleteRole(@PathVariable int id) {
         roleService.delete(id);
         return "redirect:/role";
     }
 
     @PostMapping("/role/add")
-    public String addTask(@ModelAttribute Role role) {
+    public String addRole(@ModelAttribute Role role) {
         roleService.save(role);
         return "redirect:/role";
     }
