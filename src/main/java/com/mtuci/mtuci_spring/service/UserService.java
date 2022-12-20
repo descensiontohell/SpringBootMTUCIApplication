@@ -1,6 +1,5 @@
 package com.mtuci.mtuci_spring.service;
 
-import com.mtuci.mtuci_spring.entity.Role;
 import com.mtuci.mtuci_spring.entity.User;
 import com.mtuci.mtuci_spring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,10 @@ public class UserService {
 
     public List<User> getAll() {
         return userRepository.findAll();
+    }
+
+    public User getOne(Integer roleId) {
+        return userRepository.getReferenceById(roleId);
     }
 
     public User save(User user) {

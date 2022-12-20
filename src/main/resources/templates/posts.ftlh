@@ -13,7 +13,13 @@
         <tr>
             <td>
                 <label>User</label>
-                <input type="text" name="user_id">
+                <select name="user_id">
+                    <#if (userSize > 0)>
+                        <#list userList as ul>
+                            <option value="${ul.id}">${ul.email}</option>
+                        </#list>
+                    </#if>
+                </select>
             </td>
 
             <td>

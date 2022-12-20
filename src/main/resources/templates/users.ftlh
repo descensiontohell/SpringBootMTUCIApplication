@@ -18,7 +18,13 @@
 
             <td>
                 <label>Role</label>
-                <input type="number" name="role_id">
+                <select name="role_id">
+                    <#if (roleSize > 0)>
+                        <#list roleList as rl>
+                            <option value="${rl.id}">${rl.name}</option>
+                        </#list>
+                    </#if>
+                </select>
             </td>
 
             <td>
@@ -49,7 +55,7 @@
         <td>${user.id}</td>
         <td>${user.email}</td>
         <td>${user.role.name}</td>
-        <td>${user.gender}</td>
+        <td>${user.gender?string("true", "false")}</td>
         <td><a href="${'/delete/'+user.id}">Delete</a></td>
     </tr>
     </#list>

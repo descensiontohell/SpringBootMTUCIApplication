@@ -1,9 +1,6 @@
 package com.mtuci.mtuci_spring.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.data.jpa.provider.HibernateUtils;
 
 import java.util.Set;
 
@@ -56,9 +53,7 @@ public class User {
         return role;
     }
 
-    public void setRole(Integer roleId) {
-        Session session = new SessionFactory().openSession();
-        Role role = session.get(Role.class, roleId);
+    public void setRole(Role role) {
         this.role = role;
     }
 
