@@ -21,21 +21,10 @@ public class PostController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/post")
-    public String getAll(Model model) {
-        List<Post> postList = postService.getAll();
-        List<User> userList = userService.getAll();
-        model.addAttribute("userList", userList);
-        model.addAttribute("userSize", userList.size());
-        model.addAttribute("postList", postList);
-        model.addAttribute("postSize", postList.size());
-        return "posts";
-    }
-
     @RequestMapping("/post/delete/{id}")
     public String deletePost(@PathVariable int id) {
         postService.delete(id);
-        return "redirect:/post";
+        return "redirect:/";
     }
 
     @PostMapping("/post/add")
@@ -47,6 +36,27 @@ public class PostController {
         post.setUser(postUser);
 
         postService.save(post);
-        return "redirect:/post";
+        return "redirect:/";
+    }
+
+    @GetMapping("/post/edit/{id}")
+    public String edit(Model model, @PathVariable int id) {
+        Post targetPost = postService.getOne(id);
+        model.addAttribute("post", targetPost);
+
+        return "edit_post";
+
+    }
+
+    @PostMapping("/post/edit/{id}")
+    public String edit(@ModelAttribute Post post, @RequestBody MultiValueMap<String, String> formData) {
+        Integer userId = Integer.parseInt(formData.get("user_id").get(0).toString());
+
+        User postUser = userService.getOne(userId);
+
+        post.setUser(postUser);
+
+        postService.save(post);
+        return "redirect:/";
     }
 }

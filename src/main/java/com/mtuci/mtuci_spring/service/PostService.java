@@ -13,6 +13,10 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
+    public Post getOne(Integer postId) {
+        return postRepository.getReferenceById(postId);
+    }
+
     public List<Post> getAll() {
         return postRepository.findAll();
     }

@@ -17,8 +17,8 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getOne(Integer roleId) {
-        return userRepository.getReferenceById(roleId);
+    public User getOne(Integer userId) {
+        return userRepository.getReferenceById(userId);
     }
 
     public User save(User user) {

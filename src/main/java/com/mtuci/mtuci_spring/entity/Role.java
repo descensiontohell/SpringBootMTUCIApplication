@@ -50,4 +50,9 @@ public class Role {
     public void setPermissionLevel(Integer permission_level) {
         this.permissionLevel = permission_level;
     }
+
+    @PreRemove
+    public void setUserRolesToNull() {
+        users.forEach(user -> user.setRole(null));
+    }
 }

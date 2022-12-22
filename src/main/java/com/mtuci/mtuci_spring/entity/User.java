@@ -1,6 +1,7 @@
 package com.mtuci.mtuci_spring.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
 
 import java.util.Set;
 
@@ -17,10 +18,10 @@ public class User {
    private Boolean gender;
 
    @ManyToOne
-   @JoinColumn(name="role_id", nullable=false)
+   @JoinColumn(name="role_id")
    private Role role;
 
-   @OneToMany(mappedBy="user")
+   @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
    private Set<Post> posts;
 
    public User() {
@@ -63,5 +64,9 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getRoleId() {
+       return this.role.getId();
     }
 }

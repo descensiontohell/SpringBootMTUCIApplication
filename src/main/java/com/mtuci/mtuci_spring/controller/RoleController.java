@@ -5,6 +5,7 @@ import com.mtuci.mtuci_spring.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,23 +16,30 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
-    @GetMapping("/role")
-    public String getAll(Model model) {
-        List<Role> roleList = roleService.getAll();
-        model.addAttribute("roleList", roleList);
-        model.addAttribute("roleSize", roleList.size());
-        return "roles";
-    }
-
     @RequestMapping("/role/delete/{id}")
     public String deleteRole(@PathVariable int id) {
         roleService.delete(id);
-        return "redirect:/role";
+        return "redirect:/";
     }
 
     @PostMapping("/role/add")
     public String addRole(@ModelAttribute Role role) {
         roleService.save(role);
-        return "redirect:/role";
+        return "redirect:/";
+    }
+
+    @GetMapping("/role/edit/{id}")
+    public String edit(Model model, @PathVariable int id) {
+        Role targetRole = roleService.getOne(id);
+        model.addAttribute("role", targetRole);
+
+        return "edit_role";
+
+    }
+
+    @PostMapping("/role/edit/{id}")
+    public String edit(@ModelAttribute Role role) {
+        roleService.save(role);
+        return "redirect:/";
     }
 }
