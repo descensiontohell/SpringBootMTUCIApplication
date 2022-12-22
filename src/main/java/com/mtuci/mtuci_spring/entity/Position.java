@@ -5,26 +5,26 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "roles")
-public class Role {
+@Table(name = "positions")
+public class Position {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private String name;
 
-    private Integer permissionLevel;
+    private Integer salary;
 
-    @OneToMany(mappedBy="role")
-    private Set<User> users;
+    @OneToMany(mappedBy="position")
+    private Set<Employee> employees;
 
-    public Role() {
+    public Position() {
     }
 
-    public Role(Integer id, String name, Integer permissionLevel) {
+    public Position(Integer id, String name, Integer salary) {
         this.id = id;
         this.name = name;
-        this.permissionLevel = permissionLevel;
+        this.salary = salary;
     }
 
     public Integer getId() {
@@ -43,16 +43,16 @@ public class Role {
         this.name = name;
     }
 
-    public Integer getPermissionLevel() {
-        return permissionLevel;
+    public Integer getSalary() {
+        return salary;
     }
 
-    public void setPermissionLevel(Integer permission_level) {
-        this.permissionLevel = permission_level;
+    public void setSalary(Integer salary) {
+        this.salary = salary;
     }
 
     @PreRemove
-    public void setUserRolesToNull() {
-        users.forEach(user -> user.setRole(null));
+    public void setEmployeePositionsToNull() {
+        employees.forEach(e -> e.setPosition(null));
     }
 }

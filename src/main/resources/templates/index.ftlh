@@ -8,150 +8,111 @@
 <body>
 
 
-<#--ROLES-->
-<h2>Roles (${roleSize} entries)</h2>
+
+<form class="form-wrapper" id="add_position" action="/position/add" method="post">
+    <h2>Positions (${positionSize} entries)</h2>
+    <lable>Position</lable>
+    <input class="name-input" type="text" name="name">
+    <lable>Salary</lable>
+    <input class="number-input" type="number" value="0" name="salary">
+    <a class="add-button" href="javascript:{}" onclick="document.getElementById('add_position').submit();">Add</a>
+</form>
 
 <div class="table_container">
     <table border="1px">
         <tr>
             <td>Id</td>
             <td>Name</td>
-            <td>Permission Level</td>
+            <td>Salary</td>
             <td></td>
         </tr>
-
-        <form id="add_role" action="/role/add" method="post">
+        <#list positionList as position>
             <tr>
-                <td></td>
-                <td>
-                    <input type="text" name="name">
-                </td>
-
-                <td>
-                    <input type="number" name="permissionLevel">
-                </td>
-
-                <td>
-                    <a href="javascript:{}" onclick="document.getElementById('add_role').submit();">Add</a>
-                </td>
-            </tr>
-        </form>
-
-        <#list roleList as role>
-            <tr>
-                <td>${role.id}</td>
-                <td>${role.name}</td>
-                <td>${role.permissionLevel}</td>
-                <td><a href="${'/role/edit/'+role.id}">Edit</a></td>
-                <td><a href="${'/role/delete/'+role.id}">Delete</a></td>
+                <td>${position.id}</td>
+                <td>${position.name}</td>
+                <td>${position.salary}</td>
+                <td><a href="${'/position/edit/'+position.id}">Edit</a></td>
+                <td><a href="${'/position/delete/'+position.id}">Delete</a></td>
             </tr>
         </#list>
     </table>
 </div>
 
-<#--USERS-->
-<h2>Users (${userSize} entries)</h2>
+
+<form class="form-wrapper" id="add_employee" action="/add" method="post">
+    <h2>Employees (${employeeSize} entries)</h2>
+    <lable>Position</lable>
+    <select name="position_id">
+        <#if (positionSize > 0)>
+            <#list positionList as rl>
+                <option value="${rl.id}">${rl.name}</option>
+            </#list>
+        </#if>
+    </select>
+    <lable>Email</lable>
+    <input type="text" name="email">
+    <lable>Name</lable>
+    <input type="text" name="name">
+    <a class="add-button" href="javascript:{}" onclick="document.getElementById('add_employee').submit();">Add</a>
+</form>
 
 <div class="table_container">
     <table border="1px">
         <tr>
             <td>Id</td>
+            <td>Name</td>
             <td>Email</td>
-            <td>Role</td>
-            <td>Male?</td>
+            <td>Position</td>
             <td></td>
         </tr>
-        <form id="add_user" action="/add" method="post">
+        <#list employeeList as employee>
             <tr>
-                <td></td>
-
-                <td>
-                    <input type="text" name="email">
-                </td>
-
-                <td>
-                    <select name="role_id">
-                        <#if (roleSize > 0)>
-                            <#list roleList as rl>
-                                <option value="${rl.id}">${rl.name}</option>
-                            </#list>
-                        </#if>
-                    </select>
-                </td>
-
-                <td>
-                    <input type="checkbox" name="gender">
-                </td>
-
-                <td>
-                    <a href="javascript:{}" onclick="document.getElementById('add_user').submit();">Add</a>
-                </td>
-            </tr>
-        </form>
-
-        <#list userList as user>
-            <tr>
-                <td>${user.id}</td>
-                <td>${user.email}</td>
-                <td><#if user.role??>${user.role.name}</#if></td>
-                <td>${user.gender?string("Male", "Female")}</td>
-                <td><a href="${'/edit/'+user.id}">Edit</a></td>
-                <td><a href="${'/delete/'+user.id}">Delete</a></td>
+                <td>${employee.id}</td>
+                <td>${employee.name}</td>
+                <td>${employee.email}</td>
+                <td><#if employee.position??>${employee.position.name}</#if></td>
+                <td><a href="${'/edit/'+employee.id}">Edit</a></td>
+                <td><a href="${'/delete/'+employee.id}">Delete</a></td>
             </tr>
         </#list>
     </table>
 </div>
 
-<#--POSTS-->
-<h2>Posts (${postSize} entries)</h2>
+
+<form class="form-wrapper" id="add_task" action="/task/add" method="post">
+    <h2>Tasks (${taskSize} entries)</h2>
+    <lable>Employee</lable>
+    <select name="employee_id">
+        <#if (employeeSize > 0)>
+            <#list employeeList as ul>
+                <option value="${ul.id}">${ul.email}</option>
+            </#list>
+        </#if>
+    </select>
+    <lable>Title</lable>
+    <input type="text" name="title">
+    <lable>Description</lable>
+    <input type="text" name="description">
+    <a class="add-button" href="javascript:{}" onclick="document.getElementById('add_task').submit();">Add</a>
+</form>
 
 <div class="table_container">
     <table border="1px">
         <tr>
             <td>Id</td>
-            <td>User</td>
+            <td>Employee</td>
             <td>Title</td>
             <td>Description</td>
             <td></td>
         </tr>
-
-        <form id="add_post" action="/post/add" method="post">
-            <tr>
-                <td></td>
-
-                <td>
-                    <select name="user_id">
-                        <#if (userSize > 0)>
-                            <#list userList as ul>
-                                <option value="${ul.id}">${ul.email}</option>
-                            </#list>
-                        </#if>
-                    </select>
-                </td>
-
-                <td>
-                    <input type="text" name="title">
-                </td>
-
-                <td>
-                    <input type="text" name="description">
-                </td>
-
-                <td>
-                    <a href="javascript:{}" onclick="document.getElementById('add_post').submit();">Add</a>
-                </td>
-
-            </tr>
-        </form>
-
-        <#list postList as post>
-            <tr>
-                <td>${post.id}</td>
-                <td>${post.user.email}</td>
-                <td>${post.title}</td>
-                <td>${post.description}</td>
-                <td><a href="${'/post/edit/'+post.id}">Edit</a></td>
-                <td><a href="${'/post/delete/'+post.id}">Delete</a></td>
+        <#list taskList as task>
+            <tr class="table-row">
+                <td>${task.id}</td>
+                <td>${task.employee.name}</td>
+                <td>${task.title}</td>
+                <td>${task.description}</td>
+                <td><a href="${'/task/edit/'+task.id}">Edit</a></td>
+                <td><a href="${'/task/delete/'+task.id}">Delete</a></td>
             </tr>
         </#list>
     </table>

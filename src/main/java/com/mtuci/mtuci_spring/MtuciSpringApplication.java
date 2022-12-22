@@ -9,5 +9,4 @@ public class MtuciSpringApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MtuciSpringApplication.class, args);
 	}
-
 }

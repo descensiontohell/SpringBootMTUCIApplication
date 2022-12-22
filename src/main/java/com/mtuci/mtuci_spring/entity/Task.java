@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name = "posts")
-public class Post {
+@Table(name = "tasks")
+public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,15 +16,15 @@ public class Post {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
-    private User user;
+    @JoinColumn(name="employee_id", nullable=false)
+    private Employee employee;
 
-    public Post() {
+    public Task() {
     }
 
-    public Post(Integer id, User user, String title, String description) {
+    public Task(Integer id, Employee employee, String title, String description) {
         this.id = id;
-        this.user = user;
+        this.employee = employee;
         this.title = title;
         this.description = description;
     }
@@ -53,11 +53,11 @@ public class Post {
         this.description = description;
     }
 
-    public User getUser() {
-        return user;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }
