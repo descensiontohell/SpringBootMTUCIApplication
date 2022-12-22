@@ -1,16 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 table, caption, tbody, tfoot, thead, tr, th, td {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    font-size: 100%;
-    vertical-align: baseline;
-    background: transparent;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Roboto', sans-serif;
+  background-color: azure;
+  text-align: center;
 }
 
 td {
-  min-width: 30px;
+  text-align: center;
+  font-size: 14px;
+  min-width: 80px;
+}
+table {
+  border: 2px solid blueviolet;
+  padding: 5px;
+  border-radius: 20px;
+}
+.table-row {
+  border-top: 2px solid blueviolet;
 }
 input {
   min-width: 20px;
+  margin: 10px 0;
+}
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-self: center;
+  margin: 20px auto;
+  border: 2px solid blueviolet;
+  border-radius: 20px;
+  text-align: center;
+  padding: 20px;
+  background-color: rgb(234, 211, 255);
+  -webkit-box-shadow: 0px 0px 10px 7px rgba(98, 83, 255, 0.5);
+  -moz-box-shadow: 0px 0px 10px 7px rgba(98, 83, 255, 0.5);
+  box-shadow: 0px 0px 10px 7px rgba(98, 83, 255, 0.5);
+}
+.name-input {
+  width: 200px;
+}
+
+.number-input {
+  width: 200px;
+  
+}
+
+.add-button {
+  text-decoration: none;
+  display: block;
+  width: 200px;
+  height: 30px;
+  border: 2px solid blueviolet;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 30px;
+  color: rgb(32, 10, 90);
+  background-color: azure;
+}
+
+.table_container {
+  margin: 0 auto;
+  
 }
